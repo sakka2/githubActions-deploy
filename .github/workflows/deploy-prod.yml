@@ -32,12 +32,12 @@ jobs:
         run: |
           echo 'Overwrite for get diff.'
           ## ls -1A "${{ matrix.K8S_DEPLOY_TARGET }}" | xargs -I% sh -c "echo '---'; kubectl diff -f % || true"
-          ## ls -1A "${{ matrix.K8S_DEPLOY_TARGET }}" 
+          ls -1A "${{ matrix.K8S_DEPLOY_TARGET }}" | xargs -I% sh -c "echo '---'; cat % || true"
       - name: wait-for-ready
         run: echo 'No need to wait.'
       - name: Debug Info
         run: |
-          echo "Completed dryrun for ${ { matrix.name }}"
+          echo "Completed dryrun for ${{ matrix.name }}"
 
   before_deploy:
     if: ${{ github.event_name == 'workflow_dispatch' }}
